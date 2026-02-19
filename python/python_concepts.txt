@@ -1,1 +1,4 @@
 Python is a free open source high level integrated programming language
+Easy to learn, Simple syntax, Large community, Cross-platform, Used by top companies
+
+ 
