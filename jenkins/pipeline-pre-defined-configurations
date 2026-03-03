@@ -1,0 +1,60 @@
+pipeline{
+	agent any
+	parameters{
+		string(name: 'NAME', defaultValue: '', description: 'Please tell me your name?')
+		booleanParam(name: 'SKIP_TEST', description: 'Want to skip test runs to direct deploy')
+		choice(name: 'BRANCH', choices: ['master', 'stagging', 'prod'], description: 'Select the stages')
+	}
+
+	environment{
+		DOCKER_USER = 'kavya'
+		AWS_ACCESS_KEY = '647662554647476'
+	}
+
+	stages{
+		stage('Stage1'){
+			environment{
+                                        STAGE = "stage1"
+                                }
+
+			steps{
+				echo "NAME: ${params.NAME}"
+				echo "SKIP_TEST: ${params.SKIP_TEST}"
+				echo "BRANCH TO DEPLOY: ${params.BRANCH}"
+				echo "DOCKER_USER: ${env.DOCKER_USER}"
+				echo "AWS_ACCESS_KEY: ${env.AWS_ACCESS_KEY}"
+				echo "STAGE: ${env.STAGE}"
+
+
+				sh '''
+					echo $NAME 
+					echo $SKIP_TEST 
+					echo $BRANCH
+					echo $STAGE
+				'''
+				
+			}
+		}
+		stage('stage2'){
+			steps{
+				echo "NAME: ${params.NAME}"
+                                echo "SKIP_TEST: ${params.SKIP_TEST}"
+                                echo "BRANCH TO DEPLOY: ${params.BRANCH}"
+                                echo "DOCKER_USER: ${env.DOCKER_USER}"
+                                echo "AWS_ACCESS_KEY: ${env.AWS_ACCESS_KEY}"
+                                echo "STAGE: ${env.STAGE}"
+
+
+                                sh '''
+                                        echo $NAME
+                                        echo $SKIP_TEST
+                                        echo $BRANCH
+                                        echo $STAGE
+                                '''
+
+				
+			}
+		}
+	}
+
+}
