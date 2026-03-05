@@ -1,0 +1,27 @@
+pipeline{
+    agent none
+    stages{
+        stage('Non parallel testing'){
+            agent { label 'master' }
+            steps{
+                echo 
+            }
+        }
+        stage('Parallel testing'){
+            parallel{
+                stage('parallel stage1'){
+                    agent { label 'slave1' }
+                    steps{
+                        echo 'I am in parallel and stage1 runned by slave1'
+                    }
+                }
+                stage('parallel stage2'){
+                    agent { label 'slave2' }
+                    steps{
+                        echo 'I am in parallel and stage2 runned by slave2'
+                    }
+                }   
+            }
+        }
+   }
+}
