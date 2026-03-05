@@ -1,0 +1,35 @@
+pipeline{
+    agent none
+    stages{
+        stage('stage1'){
+            agent { label 'salve1' }
+            steps{
+                echo 'This stage1 is running on slave1'
+            }
+        }
+        stage('stage2'){
+            agent { label 'slave2 '}
+            steps{
+                echo 'This stage2 is running on slave2'
+            }
+        }
+        stage('stage3'){
+            agent { label 'master' }
+            steps{
+                echo 'this stage3 is running on master'
+            }
+        }
+        stage('stage4'){
+            agent any
+            steps{
+                echo 'this stage4 might run on any node'
+            }
+        }
+        stage('stage5'){
+            agent { label 'slave1 || slave2' }
+            steps{
+                echo 'this stage5 might run on slave1 or slave2 node'
+            }
+        }
+    }
+}
